@@ -1,0 +1,387 @@
+/**********************************************
+                 MAIN STYLES
+**********************************************/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --cell-size: 225px;
+    --inner-cell-size: calc(var(--cell-size) * .3);
+    --XO-size: calc(var(--inner-cell-size) * .9);
+    --X-color: #2e47e8;
+    --X-win-color: #2ea4e8;
+    --O-color: #e82e47;
+    --O-win-color: #ff9191;
+    --draw-color: #e5ee6e;
+}
+
+body {
+    margin: 0;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.board-container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.see-rules {
+    margin-left: 50px;
+    font-size: 1.5rem;
+    background-color: white;
+    border: 1.5px solid black;
+    border-radius: 12px;
+    padding: .25em .25em;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+}
+
+.restart-game {
+    margin-right: 50px;
+    font-size: 1.5rem;
+    background-color: white;
+    border: 1.5px solid black;
+    border-radius: 12px;
+    padding: .25em .25em;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+}
+
+.see-rules:hover,
+.restart-game:hover {
+    background-color: black;
+    color: white;
+}
+
+/**********************************************
+                 CELL STYLES
+**********************************************/
+
+.main-cells {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 2px solid black;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.inner-cells {
+    width: var(--inner-cell-size);
+    height: var(--inner-cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.main-cells:first-child,
+.main-cells:nth-child(2),
+.main-cells:nth-child(3) {
+    border-top: none;
+}
+
+.main-cells:nth-child(3n+1) {
+    border-left: none;
+}
+
+.main-cells:nth-child(3n+3) {
+    border-right: none;
+}
+
+.main-cells:nth-child(7),
+.main-cells:nth-child(8),
+.main-cells:last-child {
+    border-bottom: none;
+}
+
+.inner-cells:first-child,
+.inner-cells:nth-child(2),
+.inner-cells:nth-child(3) {
+    border-top: none;
+}
+
+.inner-cells:nth-child(3n+1) {
+    border-left: none;
+}
+
+.inner-cells:nth-child(3n+3) {
+    border-right: none;
+}
+
+.inner-cells:nth-child(7),
+.inner-cells:nth-child(8),
+.inner-cells:last-child {
+    border-bottom: none;
+}
+
+.enabled {
+    background-color: white;
+    cursor: pointer;
+}
+
+.disabled {
+    background-color: rgba(0, 0, 0, 0.75);
+    pointer-events: none;
+}
+
+
+/**********************************************
+                  XO STYLES
+**********************************************/
+
+.inner-cells.x,
+.inner-cells.o {
+    cursor: not-allowed;
+}
+
+.inner-cells.x::before,
+.inner-cells.x::after {
+    background-color: var(--X-color);
+}
+
+.inner-cells.o::before,
+.inner-cells.o::after {
+    background-color: var(--O-color);
+}
+
+.board-container.x .inner-cells:not(.x):not(.o):hover::before,
+.board-container.x .inner-cells:not(.x):not(.o):hover::after {
+    background-color: lightgrey;
+}
+
+.inner-cells.x::before,
+.inner-cells.x::after,
+.board-container.x .inner-cells:not(.x):not(.o):hover::before,
+.board-container.x .inner-cells:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--XO-size) * .15);
+    height: var(--XO-size);
+}
+
+.inner-cells.x::before,
+.board-container.x .inner-cells:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+}
+
+.inner-cells.x::after,
+.board-container.x .inner-cells:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+}
+
+.board-container.o .inner-cells:not(.x):not(.o):hover::before,
+.board-container.o .inner-cells:not(.x):not(.o):hover::after {
+    background-color: lightgrey;
+}
+
+.inner-cells.o::before,
+.inner-cells.o::after,
+.board-container.o .inner-cells:not(.x):not(.o):hover::before,
+.board-container.o .inner-cells:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.inner-cells.o::before,
+.board-container.o .inner-cells:not(.x):not(.o):hover::before {
+    width: var(--XO-size);
+    height: var(--XO-size);
+}
+
+.inner-cells.o::after,
+.board-container.o .inner-cells:not(.x):not(.o):hover::after {
+    width: calc(var(--XO-size) * .7);
+    height: calc(var(--XO-size) * .7);
+    background-color: white;
+}
+
+/**********************************************
+             GAME WIN STYLES
+**********************************************/
+
+.main-cells.x-win {
+    background-color: var(--X-win-color);
+    pointer-events: none;
+}
+
+.main-cells.o-win {
+    background-color: var(--O-win-color);
+    pointer-events: none;
+}
+
+.main-cells.draw {
+    background-color: var(--draw-color);
+    pointer-events: none;
+}
+
+/**********************************************
+               GAME OVER SCREEN
+**********************************************/
+
+.game-over-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0 , .85);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+}
+
+.game-over-message button {
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: .25em .5em;
+    cursor: pointer;
+    outline: none;
+}
+.game-over-message button:hover {
+    background-color: black;
+    color: white;
+}
+
+.game-over-message.show {
+    display: flex;
+}
+
+/**********************************************
+               STARTING SCREEN
+**********************************************/
+
+.starting-screen {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    z-index: 100;
+}
+
+.title {
+    font-size: 4rem;
+    margin-top: 20px;
+}
+
+.rule-head {
+    font-size: 3rem;
+    margin: 0 0 20px 0;
+}
+
+.rule-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.color-rule {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.rule-list span {
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    margin: 0 30px 5px 20px;
+}
+
+.enable-rule {
+    background-color: white;
+}
+
+.disable-rule {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.x-win-rule {
+    background-color: var(--X-win-color);
+}
+
+.o-win-rule {
+    background-color: var(--O-win-color);
+}
+
+.draw-rule {
+    background: var(--draw-color);
+}
+
+.rule-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    list-style: disc;
+    font-size: 1.25rem;
+    min-width: 40%;
+    max-width: 45%;
+    padding-left: 0;
+}
+
+.rule-list:first-of-type {
+    margin-right: 40px;
+}
+
+.rule-list:last-of-type {
+    margin-left: 40px;
+}
+
+.rule {
+    margin-bottom: 10px;
+}
+
+.starting-screen button {
+    margin-top: 100px;
+    font-size: 2.5rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: .25em .5em;
+    cursor: pointer;
+    outline: none;
+}
+
+.starting-screen button:hover {
+    background-color: black;
+    color: white;
+}
+
+.starting-screen.hide {
+    display: none;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ultimate Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/jquery-3.4.1.min.js" defer></script>
+    <script src="js/scripts.js" defer></script>
+</head>
+<body> 
+    <div class="starting-screen">
+        <h1 class="title">Ultimate Tic Tac Toe</h1>
+        <h3 class="rule-head">Rules:</h3>
+        <div class="rule-container">
+            <ul class="rule-list">
+                <li class="rule">The basic rules of tic tac toe still apply here, you have to win three of the smaller games in a row in order to win the full game.</li>
+                <li class="rule">The next players move is dependant on your move. The cell you go in in the smaller game is the cell your opponent will be forced to go in on the bigger game.</li>
+                <li class="rule">If a box is already won/draw and your opponent sends you to that cell for your next play then the entire board becomes available for your next move.</li>
+                <li class="rule">Think carefully before you make a move and have fun!</li>
+            </ul>
+            <ul class="rule-list">
+                <div class="color-rule">
+                    <span class="enable-rule"></span>
+                    <li class="rule">Enabled cells, cells that are currently available for the current turn.</li>
+                </div>
+                <div class="color-rule">
+                    <span class="disable-rule"></span>
+                    <li class="rule">Disabled cells, cells that are currently unavailable for the current turn.</li>
+                </div>
+                <div class="color-rule">
+                    <span class="x-win-rule"></span>
+                    <li class="rule">Cells with this background color denote games won by X.</li>
+                </div>
+                <div class="color-rule">
+                    <span class="o-win-rule"></span>
+                    <li class="rule">Cells with this background color denote games won by O.</li>
+                </div>
+                <div class="color-rule">
+                    <span class="draw-rule"></span>
+                    <li class="rule">Cells with this background color denote games drawn.</li>
+                </div>
+            </ul>
+        </div>
+        
+        <button class="start-game-button">Start Game</button>
+    </div>
+
+    <div class="game-container">
+
+        <button class="see-rules">See Rules</button>
+
+        <div class="board-container" id="board-container">
+            <div class="main-cells" id="1" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="2" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="3" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="4" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="5" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="6" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="7" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="8" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+            <div class="main-cells" id="9" data-cell>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+                <div class="inner-cells" data-cell></div>
+            </div>
+        </div>
+
+        <button class="restart-game">Restart Game</button>
+
+    </div>
+
+    <div class="game-over-message">
+        <div data-wlt-text></div>
+        <button id="restart-button">Restart</button>
+    </div>
+</body>
+</html>
